@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-4 col-md-2 mr-0" href="#">Javate Store</a>
+        <form class = "col-8" id="searchform" action = "{% url 'search' %}" method="get" accept-charset="utf-8">
+            <div class="row">
+                <input class="form-control form-control-dark col-9" name="q" type="text" placeholder="Search" value="{{ request.GET.q }}">
+                <button class="btn btn-outline-primary col-2" type="submit">
+                        <i class="fa fa-search">SEARCH</i>
+                </button>
+            </div>
+            </form>
+        <a class="navbar-brand col-sm-4 col-md-2 mr-0 text-center" href="{% url 'admin:login' %}">Inventory</a>
+      </nav>
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <div class="container">
+                          <div class="row">
+                              <div class="col-7"> 
+                                  <div class="container mx-auto border justify-content-center" style="height: 550px">
+                                      
+                                    {% if products %}
+                                        {% for product in products %}
+                                        <a class="btn btn-primary m-1 col-2" href="{% url 'add_to_cart' product.id %}" role="button">{{ product.name }}</a>
+                                        {% endfor %}  
+                                    {% else %}
+                                        <div class="col-md-12">
+                                            <p>No Products Available</p>
+                                        </div>   
+                                    {% endif %}
+                                  </div>
+                              </div>
+                              <div class="col-5 border border-dark">
+                                  <div class="row">
+                                      <div class="col-12">
+                                          <table class="table table-borderless table-sm">
+                                                  <thead>
+                                                      <tr>
+                                                      <th scope="col">#</th>
+                                                      <th scope="col">Product Code</th>
+                                                      <th scope="col">Name</th>
+                                                      <th scope="col">Price</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      
+                                                    {% if cart %}
+                                                        {% for cartItem in cart %}
+                                                            <tr>
+                                                            <th scope="row">{{ forloop.counter0 }}</th>
+                                                                <td>{{ cartItem.code }}</td>
+                                                                <td>{{ cartItem.name }}</td>
+                                                                <td>{{ cartItem.price }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                    <th rowspan="6">Add products to Cart</th>
+                                                    </tr>
+                                                    {% endif %}
+                                                  </tbody>
+                                          </table>
+                                      </div>
+                                          <div class="col-12"  style="position: absolute; bottom:0">
+                                              <div class="row">
+                                                  <div class="col-12">
+                                                      <div class="row">
+                                                          <div class="col-6">
+                                                              <p>TOTAL:</p>
+                                                          </div>
+                                                          <div class="col-5 text-right">
+                                                              <p>{{ total }}</p>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-12"><a class="btn btn-primary btn-lg btn-block m-1"
+                                                   href="{% url 'checkout' %}" role="button">Check Out</a>
+                                                   
+                                                   </div>
+                                              </div>
+                                          </div>
+                                  </div>           
+                              </div>
+                          </div>
+                      </div>
+            </div>
+          </main>
+        </div>
+      </div>     
+{% endblock %}
+    
