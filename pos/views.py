@@ -40,7 +40,7 @@ def checkout(request):
     cart, status = Cart.objects.get_or_create()
     total = sum([item.price for item in cart.items.all()])
     context = {
-        'total': total
+        'total': total,
     }
     
     return render(request, 'pages/checkout.html', context)
