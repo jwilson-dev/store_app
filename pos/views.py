@@ -5,7 +5,7 @@ from cart.models import Cart
 
 
 def pos(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(~Q(stock = 0))
     context = {
         'products':products
     }
@@ -21,7 +21,7 @@ def search(request):
     return render(request, 'pages/index.html', context)
 
 def add_to_cart(request, products_id):
-    products = Product.objects.all()
+    products = Product.objects.filter(~Q(stock = 0))
     product = get_object_or_404(Product, pk=products_id)
     cart, status = Cart.objects.get_or_create()
     cart.items.add(product)

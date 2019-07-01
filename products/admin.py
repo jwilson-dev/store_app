@@ -7,6 +7,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display_links = ('code', 'name')
     list_filter = ('category',)
     search_fields = ('code', 'name')
+    list_editable = ('stock',)
     readonly_fields = ('add_date','last_restock')
 
 admin.site.register(Product, ProductAdmin)
