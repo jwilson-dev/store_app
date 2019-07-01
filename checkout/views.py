@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from cart.models import Cart
 from products.models import Product
@@ -11,4 +11,4 @@ def proceed(request):
         product.stock -= 1
         product.save()
     cart.delete()
-    return render(request, 'pages/index.html')
+    return redirect('index')
