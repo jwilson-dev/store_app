@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'categories.apps.CategoriesConfig',
     'cart.apps.CartConfig',
     'checkout.apps.CheckoutConfig',
+    'transactions.apps.TransactionsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
